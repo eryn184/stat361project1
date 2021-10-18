@@ -1,0 +1,100 @@
+---
+title: "Project 1"
+author: "Nicole Tucker, Sarah Vreeland, and Sean Froidcoeur"
+date: "10/18/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(broom)
+library(readr)
+```
+
+Questions:
+Is it okay that our response is an indicator variable? (Heart disease vs no heart disease) -> not looking at linear vs non linear relationships with dotplots since response isn't quantitative
+
+```{r}
+# Read in data
+heart_df <- read_csv("heart.csv", 
+                     col_types = cols(Sex = col_factor(),
+                                      ChestPainType = col_factor(),
+                                      FastingBS = col_factor(),
+                                      RestingECG = col_factor(),
+                                      ExerciseAngina = col_factor(),
+                                      ST_Slope = col_factor(),
+                                      HeartDisease = col_factor()
+                                      )
+                     ) 
+```
+
+
+```{r}
+# Age vs Heart Disease
+ggplot(heart_df, aes(x = HeartDisease, y = Age))+
+  geom_boxplot()
+```
+
+```{r}
+# Sex vs Heart Disease
+ggplot(heart_df, aes(x = HeartDisease, fill = Sex))+
+  geom_bar()
+summary(heart_df$Sex) #Way more male participants (725) than female (193)
+```
+
+```{r}
+# Chest Pain Type vs Heart Disease
+ggplot(heart_df, aes(x = HeartDisease, fill = ChestPainType))+
+  geom_bar()
+```
+
+```{r}
+# Resting BP vs Heart Disease
+ggplot(heart_df, aes(x = HeartDisease, y = RestingBP))+
+  geom_boxplot()
+```
+
+```{r}
+# Cholesterol vs Heart Disease
+ggplot(heart_df, aes(x = HeartDisease, y = Cholesterol))+
+  geom_boxplot()
+ggplot(heart_df, aes(x = Cholesterol))+
+  geom_histogram() #What's with all the zeros?
+```
+
+```{r}
+# Fasting BS vs Heart Disease
+ggplot(heart_df, aes(x = HeartDisease, fill = FastingBS))+
+  geom_bar()
+```
+
+```{r}
+# Resting ECG vs Heart Disease
+ggplot(heart_df, aes(x = HeartDisease, fill = RestingECG))+
+  geom_bar()
+```
+
+```{r}
+# Max HR vs Heart Disease
+ggplot(heart_df, aes(x = HeartDisease, y = MaxHR))+
+  geom_boxplot()
+```
+
+```{r}
+# Exercise Angina vs Heart Disease
+ggplot(heart_df, aes(x = HeartDisease, fill = ExerciseAngina))+
+  geom_bar()
+```
+
+```{r}
+# Oldpeak vs Heart Disease
+ggplot(heart_df, aes(x = HeartDisease, y = Oldpeak))+
+  geom_boxplot()
+```
+
+```{r}
+# ST Slope vs Heart Disease
+ggplot(heart_df, aes(x = HeartDisease, fill = ST_Slope))+
+  geom_bar()
+```
