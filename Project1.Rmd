@@ -39,144 +39,54 @@ colnames(life_expectancy_df) = c("country", "year", "status", "life_expectancy",
                                              "gdp", "population", "thinness_1_19",
                                              "thinness_5_9", "income_comp_of_resources",
                                              "schooling")
+health_df <- read_csv("insurance.csv",
+                      col_types = cols(sex = col_factor(),
+                                      smoker = col_factor(),
+                                      region = col_factor()))
 
 ```
 
 ```{r}
-# Year vs Life Expectancy
-life_expectancy_df$year <- as.factor(life_expectancy_df$year)
-ggplot(life_expectancy_df, aes(x = year, y = life_expectancy)) +
+# Age vs Insurance Charges
+ggplot(health_df, aes(x = age, y = charges)) +
+  geom_point()
+```
+
+```{r}
+# Sex vs Insurance Charges
+ggplot(health_df, aes(x = sex, y = charges)) +
   geom_boxplot()
 ```
+
 ```{r}
-# Status vs Life Expectancy
-life_expectancy_df$status <- as.factor(life_expectancy_df$status)
-ggplot(life_expectancy_df, aes(x = status, y = life_expectancy)) +
+# BMI vs Insurance Charges
+ggplot(health_df, aes(x = bmi, y = charges)) +
+  geom_point()
+```
+
+```{r}
+# Children vs Insurance Charges
+# Not sure what to do here
+# don't think we should make children a factor because there is meaning behind the numbers, but it graphs better as a factor
+summary(health_df$children)
+```
+
+```{r}
+# Smoker Status vs Insurance Charges
+ggplot(health_df, aes(x = smoker, y = charges)) +
   geom_boxplot()
 ```
 
 ```{r}
-# Adult mortality vs Life Expectancy
-ggplot(life_expectancy_df, aes(x = adult_mortality, y = life_expectancy)) +
-  geom_point()
+# Region vs Insurance Charges
+ggplot(health_df, aes(x = region, y = charges)) +
+  geom_boxplot()
+summary(health_df$region)
 ```
 
 ```{r}
-# Infant Deaths vs Life Expectancy
-ggplot(life_expectancy_df, aes(x = infant_deaths, y = life_expectancy)) +
-  geom_point()
-
-#What the heck kind of scale is this on?????
-```
-
-```{r}
-# Alcohol vs Life Expectancy
-ggplot(life_expectancy_df, aes(x = alcohol, y = life_expectancy)) +
-  geom_point()
-```
-
-```{r}
-# Percentage Expenditure vs Life Expectancy
-ggplot(life_expectancy_df, aes(x = percentage_expenditure, y = life_expectancy)) +
-  geom_point()
-```
-
-```{r}
-# Hepatitis B vs Life Expectancy
-ggplot(life_expectancy_df, aes(x = hep_b, y = life_expectancy)) +
-  geom_point()
-```
-
-```{r}
-# Measles vs Life Expectancy
-ggplot(life_expectancy_df, aes(x = measles, y = life_expectancy)) +
-  geom_point()
-```
-
-```{r}
-# BMI vs Life Expectancy
-ggplot(life_expectancy_df, aes(x = bmi, y = life_expectancy)) +
-  geom_point()
-```
-
-```{r}
-# Under 5 Deaths vs Life Expectancy
-ggplot(life_expectancy_df, aes(x = under_five_deaths, y = life_expectancy)) +
-  geom_point()
-```
-
-```{r}
-# Polio vs Life Expectancy
-ggplot(life_expectancy_df, aes(x = polio, y = life_expectancy)) +
-  geom_point()
-```
-
-```{r}
-# Total Expenditure vs Life Expectancy
-ggplot(life_expectancy_df, aes(x = total_expenditure, y = life_expectancy)) +
-  geom_point()
-```
-
-```{r}
-# Diphtheria vs Life Expectancy
-ggplot(life_expectancy_df, aes(x = diphtheria, y = life_expectancy)) +
-  geom_point()
-```
-
-```{r}
-# HIV/AIDS vs Life Expectancy
-ggplot(life_expectancy_df, aes(x = hiv_aids, y = life_expectancy)) +
-  geom_point()
-```
-
-```{r}
-# GDP vs Life Expectancy
-ggplot(life_expectancy_df, aes(x = gdp, y = life_expectancy)) +
-  geom_point()
-```
-
-```{r}
-# Population vs Life Expectancy
-ggplot(life_expectancy_df, aes(x = population, y = life_expectancy)) +
-  geom_point()
-```
-
-```{r}
-# Thinness 1-19 Years vs Life Expectancy
-ggplot(life_expectancy_df, aes(x = thinness_1_19, y = life_expectancy)) +
-  geom_point()
-```
-
-```{r}
-# Thinness 5-9 Years vs Life Expectancy
-life_expectancy_df$status <- as.factor(life_expectancy_df$status)
-ggplot(life_expectancy_df, aes(x = thinness_5_9, y = life_expectancy)) +
-  geom_point()
-```
-
-```{r}
-# Income Composition of Resources vs Life Expectancy
-ggplot(life_expectancy_df, aes(x = income_comp_of_resources, y = life_expectancy)) +
-  geom_point()
-```
-
-```{r}
-# Schooling vs Life Expectancy
-ggplot(life_expectancy_df, aes(x = schooling, y = life_expectancy)) +
-  geom_point()
-```
-
-```{r}
-no_model <- lm(life_expectancy~1, life_expectancy_df)
-full_model <- lm(life_expectancy~., life_expectancy_df)
-forward <- stepAIC(no_model, direction = "forward", scope = formula(full_model))
-```
-
-```{r}
-life_expectancy_no_country <- life_expectancy_df[,-1]
-life_expectancy_no_country <- na.omit(life_expectancy_no_country)
-no_model <- lm(life_expectancy~1, life_expectancy_no_country)
-full_model <- lm(life_expectancy~., life_expectancy_no_country)
+no_model <- lm(charges~1, health_df)
+full_model <- lm(charges~., health_df)
 forward <- stepAIC(no_model, direction = "forward", scope = formula(full_model))
 ```
 
