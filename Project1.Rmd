@@ -10,10 +10,11 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(broom)
 library(readr)
+library(MASS)
 ```
 
 Questions:
-Is it okay that our response is an indicator variable? (Heart disease vs no heart disease) -> not looking at linear vs non linear relationships with dotplots since response isn't quantitative
+Should we take out country since there are so many?
 
 ```{r}
 # Read in data
@@ -27,74 +28,163 @@ heart_df <- read_csv("heart.csv",
                                       HeartDisease = col_factor()
                                       )
                      ) 
+facebook_df <- read_delim("dataset_Facebook.csv", delim = ";")
+facebook_df <- facebook_df[,-c(16,17,18)]
+life_expectancy_df <- read_csv("Life Expectancy Data.csv")
+colnames(life_expectancy_df) = c("country", "year", "status", "life_expectancy",
+                                             "adult_mortality", "infant_deaths", "alcohol",
+                                             "percentage_expenditure", "hep_b", "measles",
+                                             "bmi", "under_five_deaths", "polio", 
+                                             "total_expenditure", "diphtheria", "hiv_aids",
+                                             "gdp", "population", "thinness_1_19",
+                                             "thinness_5_9", "income_comp_of_resources",
+                                             "schooling")
+
 ```
 
-
 ```{r}
-# Age vs Heart Disease
-ggplot(heart_df, aes(x = HeartDisease, y = Age))+
+# Year vs Life Expectancy
+life_expectancy_df$year <- as.factor(life_expectancy_df$year)
+ggplot(life_expectancy_df, aes(x = year, y = life_expectancy)) +
+  geom_boxplot()
+```
+```{r}
+# Status vs Life Expectancy
+life_expectancy_df$status <- as.factor(life_expectancy_df$status)
+ggplot(life_expectancy_df, aes(x = status, y = life_expectancy)) +
   geom_boxplot()
 ```
 
 ```{r}
-# Sex vs Heart Disease
-ggplot(heart_df, aes(x = HeartDisease, fill = Sex))+
-  geom_bar()
-summary(heart_df$Sex) #Way more male participants (725) than female (193)
+# Adult mortality vs Life Expectancy
+ggplot(life_expectancy_df, aes(x = adult_mortality, y = life_expectancy)) +
+  geom_point()
 ```
 
 ```{r}
-# Chest Pain Type vs Heart Disease
-ggplot(heart_df, aes(x = HeartDisease, fill = ChestPainType))+
-  geom_bar()
+# Infant Deaths vs Life Expectancy
+ggplot(life_expectancy_df, aes(x = infant_deaths, y = life_expectancy)) +
+  geom_point()
+
+#What the heck kind of scale is this on?????
 ```
 
 ```{r}
-# Resting BP vs Heart Disease
-ggplot(heart_df, aes(x = HeartDisease, y = RestingBP))+
-  geom_boxplot()
+# Alcohol vs Life Expectancy
+ggplot(life_expectancy_df, aes(x = alcohol, y = life_expectancy)) +
+  geom_point()
 ```
 
 ```{r}
-# Cholesterol vs Heart Disease
-ggplot(heart_df, aes(x = HeartDisease, y = Cholesterol))+
-  geom_boxplot()
-ggplot(heart_df, aes(x = Cholesterol))+
-  geom_histogram() #What's with all the zeros?
+# Percentage Expenditure vs Life Expectancy
+ggplot(life_expectancy_df, aes(x = percentage_expenditure, y = life_expectancy)) +
+  geom_point()
 ```
 
 ```{r}
-# Fasting BS vs Heart Disease
-ggplot(heart_df, aes(x = HeartDisease, fill = FastingBS))+
-  geom_bar()
+# Hepatitis B vs Life Expectancy
+ggplot(life_expectancy_df, aes(x = hep_b, y = life_expectancy)) +
+  geom_point()
 ```
 
 ```{r}
-# Resting ECG vs Heart Disease
-ggplot(heart_df, aes(x = HeartDisease, fill = RestingECG))+
-  geom_bar()
+# Measles vs Life Expectancy
+ggplot(life_expectancy_df, aes(x = measles, y = life_expectancy)) +
+  geom_point()
 ```
 
 ```{r}
-# Max HR vs Heart Disease
-ggplot(heart_df, aes(x = HeartDisease, y = MaxHR))+
-  geom_boxplot()
+# BMI vs Life Expectancy
+ggplot(life_expectancy_df, aes(x = bmi, y = life_expectancy)) +
+  geom_point()
 ```
 
 ```{r}
-# Exercise Angina vs Heart Disease
-ggplot(heart_df, aes(x = HeartDisease, fill = ExerciseAngina))+
-  geom_bar()
+# Under 5 Deaths vs Life Expectancy
+ggplot(life_expectancy_df, aes(x = under_five_deaths, y = life_expectancy)) +
+  geom_point()
 ```
 
 ```{r}
-# Oldpeak vs Heart Disease
-ggplot(heart_df, aes(x = HeartDisease, y = Oldpeak))+
-  geom_boxplot()
+# Polio vs Life Expectancy
+ggplot(life_expectancy_df, aes(x = polio, y = life_expectancy)) +
+  geom_point()
 ```
 
 ```{r}
-# ST Slope vs Heart Disease
-ggplot(heart_df, aes(x = HeartDisease, fill = ST_Slope))+
-  geom_bar()
+# Total Expenditure vs Life Expectancy
+ggplot(life_expectancy_df, aes(x = total_expenditure, y = life_expectancy)) +
+  geom_point()
 ```
+
+```{r}
+# Diphtheria vs Life Expectancy
+ggplot(life_expectancy_df, aes(x = diphtheria, y = life_expectancy)) +
+  geom_point()
+```
+
+```{r}
+# HIV/AIDS vs Life Expectancy
+ggplot(life_expectancy_df, aes(x = hiv_aids, y = life_expectancy)) +
+  geom_point()
+```
+
+```{r}
+# GDP vs Life Expectancy
+ggplot(life_expectancy_df, aes(x = gdp, y = life_expectancy)) +
+  geom_point()
+```
+
+```{r}
+# Population vs Life Expectancy
+ggplot(life_expectancy_df, aes(x = population, y = life_expectancy)) +
+  geom_point()
+```
+
+```{r}
+# Thinness 1-19 Years vs Life Expectancy
+ggplot(life_expectancy_df, aes(x = thinness_1_19, y = life_expectancy)) +
+  geom_point()
+```
+
+```{r}
+# Thinness 5-9 Years vs Life Expectancy
+life_expectancy_df$status <- as.factor(life_expectancy_df$status)
+ggplot(life_expectancy_df, aes(x = thinness_5_9, y = life_expectancy)) +
+  geom_point()
+```
+
+```{r}
+# Income Composition of Resources vs Life Expectancy
+ggplot(life_expectancy_df, aes(x = income_comp_of_resources, y = life_expectancy)) +
+  geom_point()
+```
+
+```{r}
+# Schooling vs Life Expectancy
+ggplot(life_expectancy_df, aes(x = schooling, y = life_expectancy)) +
+  geom_point()
+```
+
+```{r}
+no_model <- lm(life_expectancy~1, life_expectancy_df)
+full_model <- lm(life_expectancy~., life_expectancy_df)
+forward <- stepAIC(no_model, direction = "forward", scope = formula(full_model))
+```
+
+```{r}
+life_expectancy_no_country <- life_expectancy_df[,-1]
+life_expectancy_no_country <- na.omit(life_expectancy_no_country)
+no_model <- lm(life_expectancy~1, life_expectancy_no_country)
+full_model <- lm(life_expectancy~., life_expectancy_no_country)
+forward <- stepAIC(no_model, direction = "forward", scope = formula(full_model))
+```
+
+```{r}
+backward <- stepAIC(full_model, direction = "backward")
+```
+
+```{r}
+both <- stepAIC(no_model, direction = "both", scope = formula(full_model))
+```
+
