@@ -78,6 +78,13 @@ ggplot(health_df, aes(x = smoker, y = charges)) +
 ```
 
 ```{r}
+# Age vs Insurance Charges with Smoker
+ggplot(health_df, aes(x = age, y = charges, color = smoker)) +
+  geom_point()
+```
+
+
+```{r}
 # Region vs Insurance Charges
 ggplot(health_df, aes(x = region, y = charges)) +
   geom_boxplot()
@@ -96,5 +103,9 @@ backward <- stepAIC(full_model, direction = "backward")
 
 ```{r}
 both <- stepAIC(no_model, direction = "both", scope = formula(full_model))
+```
+
+```{r}
+summary(both)
 ```
 
