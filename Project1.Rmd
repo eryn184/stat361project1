@@ -13,32 +13,9 @@ library(readr)
 library(MASS)
 ```
 
-Questions:
-Should we take out country since there are so many?
 
 ```{r}
 # Read in data
-heart_df <- read_csv("heart.csv", 
-                     col_types = cols(Sex = col_factor(),
-                                      ChestPainType = col_factor(),
-                                      FastingBS = col_factor(),
-                                      RestingECG = col_factor(),
-                                      ExerciseAngina = col_factor(),
-                                      ST_Slope = col_factor(),
-                                      HeartDisease = col_factor()
-                                      )
-                     ) 
-facebook_df <- read_delim("dataset_Facebook.csv", delim = ";")
-facebook_df <- facebook_df[,-c(16,17,18)]
-life_expectancy_df <- read_csv("Life Expectancy Data.csv")
-colnames(life_expectancy_df) = c("country", "year", "status", "life_expectancy",
-                                             "adult_mortality", "infant_deaths", "alcohol",
-                                             "percentage_expenditure", "hep_b", "measles",
-                                             "bmi", "under_five_deaths", "polio", 
-                                             "total_expenditure", "diphtheria", "hiv_aids",
-                                             "gdp", "population", "thinness_1_19",
-                                             "thinness_5_9", "income_comp_of_resources",
-                                             "schooling")
 health_df <- read_csv("insurance.csv",
                       col_types = cols(sex = col_factor(),
                                       smoker = col_factor(),
@@ -78,6 +55,13 @@ ggplot(health_df, aes(x = smoker, y = charges)) +
 ```
 
 ```{r}
+# Age vs Insurance Charges with Smoker
+ggplot(health_df, aes(x = age, y = charges, color = smoker)) +
+  geom_point()
+```
+
+
+```{r}
 # Region vs Insurance Charges
 ggplot(health_df, aes(x = region, y = charges)) +
   geom_boxplot()
@@ -96,5 +80,9 @@ backward <- stepAIC(full_model, direction = "backward")
 
 ```{r}
 both <- stepAIC(no_model, direction = "both", scope = formula(full_model))
+```
+
+```{r}
+summary(both)
 ```
 
