@@ -1,0 +1,73 @@
+---
+title: "STAT361: "
+author: "Sean Froidcoeur, Nicole Tucker, and Sarah Vreeland"
+date: "November 1st, 2021"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, echo = FALSE}
+knitr::opts_chunk$set(fig.retina = 3, warning = FALSE, message = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_accent(base_color = "#cc002b")
+```
+
+## Introduction
+
+```{r load-packages, warning = FALSE, message = FALSE, echo = FALSE}
+library(tidyverse)
+library(ggthemes)
+```
+
+Questions we are answering
+---
+
+## The Data
+Loaded in a dataset 
+
+```{r load-data, warning = FALSE, message = FALSE, echo =FALSE}
+library(tidyverse)
+library(gt)
+insurance<- read_csv("insurance.csv")
+```
+
+
+There's 7 columns with 1338 observations
+
+Categorical variables: Sex, Smoker, Region
+Continuous variables: BMI, Age, Children
+Response: Charges
+
+Each row and observation is 
+
+```{r display-data, warning = FALSE, message = FALSE}
+gt(insurance) 
+```
+---
+## Correlation Plot
+
+---
+
+## EDA- Relationships
+
+```{r graph1, warning = FALSE, message = FALSE}
+insurance %>%
+  ggplot(aes(x = bmi, y = charges)) +
+  geom_point() +
+  theme_bw()
+```
+
+---
+## Models
+
+
+---
+
+## Residuals
