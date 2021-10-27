@@ -13,7 +13,6 @@ library(readr)
 library(MASS)
 ```
 
-
 ```{r}
 # Read in data
 health_df <- read_csv("insurance.csv",

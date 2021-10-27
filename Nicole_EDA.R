@@ -103,3 +103,5 @@ summary(forward)
 backward <- stepAIC(full_model, direction = "backward")
 summary(backward)
 
+
+##I hate github and their stupid idesas that they cant make it simple to use##
