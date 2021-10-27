@@ -24,6 +24,8 @@ style_mono_accent(base_color = "#cc002b")
 ```{r load-packages, warning = FALSE, message = FALSE, echo = FALSE}
 library(tidyverse)
 library(ggthemes)
+library(gt)
+library(corrplot)
 ```
 
 Questions we are answering, Background Info
@@ -32,44 +34,88 @@ Questions we are answering, Background Info
 ## The Data
 
 ```{r load-data, warning = FALSE, message = FALSE, echo =FALSE}
-library(tidyverse)
-library(gt)
 insurance<- read_csv("insurance.csv")
+insurance$sex <- as.factor(insurance$sex)
+insurance$smoker <- as.factor(insurance$smoker)
+insurance$region <- as.factor(insurance$region)
 ```
 
 There's 7 columns with 1338 observations
 
 Categorical variables: Sex, Smoker, Region
+
 Continuous variables: BMI, Age, Children
+
 Response: Charges
 
 Each row and observation is one insured individual.
 
-```{r display-data, warning = FALSE, message = FALSE}
+```{r display-data, warning = FALSE, message = FALSE, echo = FALSE}
 gt(insurance)
 ```
----
-## Correlation Plot
-
 
 ---
-## Changing BMI to Categorical
+#Important Summary Statistics 
+
+
+
 
 ---
 
-## EDA- Relationships
+## BMI and Charges
 
-```{r graph1, warning = FALSE, message = FALSE}
+```{r graph1, warning = FALSE, message = FALSE, echo=FALSE}
 insurance %>%
   ggplot(aes(x = bmi, y = charges)) +
   geom_point() +
   theme_bw()
 ```
 
+
 ---
-## More EDA
+## Age and Charges 
 
 
+---
+## Children and Charges
+
+
+
+---
+## Sex and Charges 
+
+
+---
+## Region and Charges
+
+
+---
+## Smoker and Charges
+
+
+---
+## Changing BMI to Categorical
+
+According to the CDC:
+
+Below 18.5	Underweight
+18.5 – 24.9	Healthy Weight
+25.0 – 29.9	Overweight
+30.0 and Above	Obesity
+
+```{r bmicat, warning=TRUE, message=FALSE, echo=FALSE, fig.align='top'}
+insurance <- insurance %>%
+  mutate(bmi_categories = case_when(
+    bmi >= 30 ~ "Obesity",
+    bmi >= 25 ~ "Overweight",
+    bmi >= 18.5 ~ "Healthy Weight",
+    TRUE ~ "Underweight"
+  ))
+insurance$bmi_categories <- as.factor(insurance$bmi_categories)
+insurance %>%
+  ggplot(aes(x = age, y = charges, col = bmi_categories)) +
+  geom_point(alpha = 0.6, size = 2.5)
+```
 ---
 ## Models Using Step AIC
 
@@ -78,6 +124,12 @@ insurance %>%
 ---
 ## Incorporating Interaction Terms
 
+
+---
+## Checking AOV
+
+---
+## Final Model
 
 ---
 
