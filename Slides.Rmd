@@ -101,7 +101,7 @@ insurance %>%
 
 ---
 ## Smoker and Charges
-```{r graph6, warning=FALSE, message=FALSE, echo=FALSE}
+```{r graph6, warning=FALSE, message=FALSE,echo=FALSE}
 insurance %>%
   ggplot(aes(x = smoker, y = charges)) +
   geom_point(position = position_jitter(width = .1, height = 0))
