@@ -26,9 +26,13 @@ library(tidyverse)
 library(ggthemes)
 library(gt)
 library(corrplot)
+library(MASS)
+library(broom)
 ```
 
-Questions we are answering, Background Info
+- How do different demographic and health factors affect insurance charges?
+
+- Beneficial for insurance providers, those insured and businesses providing insurance to employees
 ---
 
 ## The Data
@@ -75,7 +79,7 @@ insurance %>%
 ---
 ## Age and Charges 
 
-```{r}
+```{r graph2, warning = FALSE, message = FALSE, echo=FALSE}
 insurance %>%
   ggplot(aes(x = age, y = charges)) +
   geom_point() +
@@ -86,7 +90,7 @@ insurance %>%
 ---
 ## Children and Charges
 
-```{r}
+```{r graph3, warning = FALSE, message = FALSE, echo=FALSE}
 #Children vs Charges
 insurance %>%
   ggplot(aes(x = children, y = charges)) +
@@ -94,19 +98,32 @@ insurance %>%
   theme_bw()
 ```
 
-
-
 ---
 ## Sex and Charges 
-
-
+```{r graph4, warning = FALSE, message = FALSE, echo=FALSE}
+insurance %>%
+  ggplot(aes(x = sex, y = charges)) +
+  geom_point(position = position_jitter(width = .1, height = 0)) +
+  theme_bw()
+```
 ---
 ## Region and Charges
-
+```{r graph5, warning = FALSE, message = FALSE, echo=FALSE}
+insurance %>%
+  ggplot(aes(x = region, y = charges)) +
+  geom_point(position = position_jitter(width = .1, height = 0)) +
+  theme_bw()
+```
 
 ---
 ## Smoker and Charges
 
+```{r graph6, warning = FALSE, message = FALSE, echo=FALSE}
+insurance %>%
+  ggplot(aes(x = smoker, y = charges)) +
+  geom_point(position = position_jitter(width = .1, height = 0)) +
+  theme_bw()
+```
 
 ---
 ## Changing BMI to Categorical
@@ -114,9 +131,14 @@ insurance %>%
 According to the CDC:
 
 Below 18.5	Underweight
+
 18.5 – 24.9	Healthy Weight
+
 25.0 – 29.9	Overweight
+
 30.0 and Above	Obesity
+
+---
 
 ```{r bmicat, warning=TRUE, message=FALSE, echo=FALSE, fig.align='top'}
 insurance <- insurance %>%
@@ -126,6 +148,8 @@ insurance <- insurance %>%
     bmi >= 18.5 ~ "Healthy Weight",
     TRUE ~ "Underweight"
   ))
+insurance <- insurance %>%
+  dplyr::select(-bmi)
 insurance$bmi_categories <- as.factor(insurance$bmi_categories)
 insurance %>%
   ggplot(aes(x = age, y = charges, col = bmi_categories)) +
@@ -134,10 +158,49 @@ insurance %>%
 ---
 ## Models Using Step AIC
 
+```{r stepaic, warning = FALSE, message=FALSE, echo= TRUE, results= FALSE}
+
+intercept_model <- lm(charges~ 1, insurance)
+full_model <- lm(charges~ ., insurance)
+
+forward <- stepAIC(intercept_model, direction = "forward", scope = formula(full_model))
+backward <- stepAIC(full_model, direction = "backward")
+both <- stepAIC(intercept_model, direction = "both", scope = formula(full_model))
+```
+
+- Forward Selection:
+
+Charges ~ smoker + age + bmi_categories + children
+
+- Backward Selection:
+
+charges ~ age + children + smoker + bmi_categories
+
+- Both:
+
+charges ~ smoker + age + bmi_categories + children
 
 
+--
+
+P-Value: < 2.2e-16;; Adjusted R-Squared: 0.7528 
 ---
 ## Incorporating Interaction Terms
+
+```{r}
+library(ggpubr)
+bmi_graph <- insurance %>%
+  ggplot(aes(x = age, y = charges, col = bmi_categories)) +
+  geom_point(alpha = 0.6, size = 2.5)
+
+smoker_graph <- insurance %>%
+  ggplot(aes(x = age, y = charges, col = smoker)) +
+  geom_point(alpha = 0.8,size = 2.5)
+
+ggarrange(bmi_graph, smoker_graph,
+                    labels = c("A", "B"),
+                    ncol = 1, nrow = 2)
+```
 
 
 ---
@@ -150,6 +213,12 @@ insurance %>%
 
 ## Residual Analysis
 
+```{r residuals, warning = FALSE, message=FALSE, echo= TRUE, results= FALSE}
+#library(ggfortify)
+#autoplot()
+```
+
 
 ---
 ## Conclusion
+
