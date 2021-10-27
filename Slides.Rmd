@@ -75,9 +75,23 @@ insurance %>%
 ---
 ## Age and Charges 
 
+```{r}
+insurance %>%
+  ggplot(aes(x = age, y = charges)) +
+  geom_point() +
+  theme_bw()
+```
+
 
 ---
 ## Children and Charges
+
+```{r}
+insurance %>%
+  ggplot(aes(x = children, y = charges)) +
+  geom_boxplot() +
+  theme_bw()
+```
 
 
 
