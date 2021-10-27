@@ -144,5 +144,15 @@ summary(model_4)
 anova(model_4,model_3)
 ```
 
+```{r}
+model_5 <- lm(charges ~ smoker + age + bmi_categories + children+region + bmi_categories:smoker + I(age^2), insurance)
+summary(model_5)
+```
+
+```{r}
+anova(model_5, model_4)
+```
+
+
 
 
