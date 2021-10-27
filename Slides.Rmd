@@ -87,6 +87,7 @@ insurance %>%
 ## Children and Charges
 
 ```{r}
+#Children vs Charges
 insurance %>%
   ggplot(aes(x = children, y = charges)) +
   geom_boxplot() +
