@@ -75,37 +75,37 @@ insurance %>%
 ---
 ## Age and Charges 
 
+```{r}
+insurance %>%
+  ggplot(aes(x = age, y = charges)) +
+  geom_point() +
+  theme_bw()
+```
+
 
 ---
 ## Children and Charges
+
+```{r}
+#Children vs Charges
+insurance %>%
+  ggplot(aes(x = children, y = charges)) +
+  geom_boxplot() +
+  theme_bw()
+```
 
 
 
 ---
 ## Sex and Charges 
-```{r graph4, warning=FALSE, message=FALSE, echo=FALSE}
-insurance %>%
-  ggplot(aes(x = sex, y = charges)) +
-  geom_point(position = position_jitter(width = .1, height = 0))
-```
 
 
 ---
 ## Region and Charges
-```{r graph5, warning=FALSE, message=FALSE, echo=FALSE}
-insurance %>%
-  ggplot(aes(x = region, y = charges)) +
-  geom_point(position = position_jitter(width = .1, height = 0))
-```
 
 
 ---
 ## Smoker and Charges
-```{r graph6, warning=FALSE, message=FALSE,echo=FALSE}
-insurance %>%
-  ggplot(aes(x = smoker, y = charges)) +
-  geom_point(position = position_jitter(width = .1, height = 0))
-```
 
 
 ---
