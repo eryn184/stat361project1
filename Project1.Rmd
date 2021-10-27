@@ -68,8 +68,8 @@ summary(health_df$region)
 ```
 
 ```{r}
-no_model <- lm(charges~1, health_df)
-full_model <- lm(charges~., health_df)
+no_model <- lm(charges~1, insurance)
+full_model <- lm(charges~., insurance)
 forward <- stepAIC(no_model, direction = "forward", scope = formula(full_model))
 ```
 
@@ -84,4 +84,65 @@ both <- stepAIC(no_model, direction = "both", scope = formula(full_model))
 ```{r}
 summary(both)
 ```
+
+```{r}
+insurance<- health_df
+```
+
+
+
+```{r}
+insurance <- insurance %>%
+  mutate(bmi_categories = case_when(
+    bmi >= 30 ~ "Obesity",
+    bmi >= 25 ~ "Overweight",
+    bmi >= 18.5 ~ "Healthy Weight",
+    TRUE ~ "Underweight"
+  ))
+insurance$bmi_categories <- as.factor(insurance$bmi_categories)
+insurance %>%
+  ggplot(aes(x = age, y = charges, col = bmi_categories)) +
+  geom_point(alpha = 0.6, size = 2.5)
+```
+
+```{r}
+model_1<-lm(charges~smoker+ age+ bmi_categories+ children+region+ region:smoker+ age:bmi_categories, insurance)
+summary(model_1)
+
+```
+```{r}
+anova(both, model_1)
+```
+
+```{r}
+model_2<-lm(charges~smoker+ age+ bmi_categories+ children+region+ region:smoker, insurance)
+summary(model_2)
+
+```
+```{r}
+anova(model_2, model_1)
+```
+```{r}
+model_3<-lm(charges~smoker+ age+ bmi_categories+ children+region+ region:smoker+ bmi_categories:smoker, insurance)
+summary(model_3)
+```
+
+
+```{r}
+anova(model_2,model_3)
+```
+
+
+
+```{r}
+model_4<-lm(charges~smoker+ age+ bmi_categories+ children+region+  bmi_categories:smoker, insurance)
+summary(model_4)
+```
+
+
+```{r}
+anova(model_4,model_3)
+```
+
+
 
