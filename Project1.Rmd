@@ -11,6 +11,7 @@ library(tidyverse)
 library(broom)
 library(readr)
 library(MASS)
+library(leaps)
 ```
 
 ```{r}
@@ -153,6 +154,53 @@ summary(model_5)
 anova(model_5, model_4)
 ```
 
+```{r}
+model_7 <- lm(charges ~ smoker + age + bmi_categories + children + bmi_categories:smoker + I(age^2), insurance)
+```
+
+```{r}
+anova(model_5, model_7)
+```
+
+
+
+
+```{r}
+#Checking for interactions
+insurance %>%
+  ggplot(aes(x = age, y = charges, color = sex)) +
+  geom_point()
+
+insurance %>%
+  ggplot(aes(x = age, y = charges, color = bmi_categories)) +
+  geom_point()
+
+insurance %>%
+  ggplot(aes(x = age, y = charges, color = smoker)) +
+  geom_point()
+
+#Both smoker and bmi_categories seem to follow a similar patterns
+
+insurance %>%
+  ggplot(aes(x = age, y = charges, color = region)) +
+  geom_point()
+```
+
+```{r}
+#Single variable models
+model7 <- lm(charges~age, )
+```
+
+```{r}
+insurance <- insurance[,-3]
+model_6 <- regsubsets(charges~., insurance)
+summary(model_6)
+```
+
+```{r}
+#Correlation between age and children
+cor(insurance$age, insurance$children)
+```
 
 
 
