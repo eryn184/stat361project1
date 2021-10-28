@@ -32,7 +32,10 @@ library(broom)
 
 - How do different demographic and health factors affect insurance charges?
 
-- Beneficial for insurance providers, those insured and businesses providing insurance to employees
+- Beneficial for:
+    1. Insurance providers
+    2. Those insured
+    3. Businesses providing insurance to employees
 ---
 
 ## The Data
@@ -44,7 +47,15 @@ insurance$smoker <- as.factor(insurance$smoker)
 insurance$region <- as.factor(insurance$region)
 ```
 
-There's 7 columns with 1338 observations
+Insurance data from Kaggle containing 7 columns with 1338 observations.
+
+Each row/observation is one insured individual.
+
+```{r display-data, warning = FALSE, message = FALSE, echo = FALSE}
+insurancetable <- insurance %>%
+  slice_head(n = 4)
+gt(insurancetable)
+```
 
 Categorical variables: Sex, Smoker, Region
 
@@ -52,16 +63,29 @@ Continuous variables: BMI, Age, Children
 
 Response: Charges
 
-Each row and observation is one insured individual.
-
-```{r display-data, warning = FALSE, message = FALSE, echo = FALSE}
-gt(insurance)
-```
 
 ---
 #Important Summary Statistics 
 
 
+
+
+---
+## The Response Variable
+
+```{r response, echo=FALSE, fig.align='left', fig.height=5, fig.width=5, message=FALSE, warning=FALSE}
+insurance %>%
+  ggplot(aes(x = charges)) +
+  geom_histogram() +
+  theme_bw()
+```
+
+```{r responselog, echo=FALSE, fig.align='right', fig.height=5, fig.width=5, message=FALSE, warning=FALSE}
+insurance %>%
+  ggplot(aes(x = log(charges))) +
+  geom_boxplot() +
+  theme_bw()
+```
 
 
 ---
