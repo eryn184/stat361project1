@@ -197,7 +197,24 @@ summary(model_8)
 ```{r}
 anova(model_5, model_8)
 ```
-
+```{r}
+model_9<- lm(charges ~ smoker + age + bmi_categories + children, insurance)
+summary(model_9)
+```
+```{r}
+model_10<- lm(charges ~ smoker + age + bmi_categories + children+ region, insurance)
+summary(model_10)
+```
+```{r}
+anova(model_9,model_10)
+```
+```{r}
+model_11 <- lm(charges ~ smoker + age + bmi_categories + children + bmi_categories:smoker + I(age^2), insurance)
+summary(model_11)
+```
+```{r}
+anova(model_11,model_5)
+```
 
 
 ```{r}
