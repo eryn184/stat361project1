@@ -28,6 +28,7 @@ library(gt)
 library(corrplot)
 library(MASS)
 library(broom)
+library(ggpubr)
 ```
 
 - How do different demographic and health factors affect insurance charges?
@@ -73,24 +74,25 @@ Response: Charges
 ---
 ## The Response Variable
 
-```{r response, echo=FALSE, fig.align='left', fig.height=5, fig.width=5, message=FALSE, warning=FALSE}
-insurance %>%
+```{r response, echo=FALSE, message=FALSE, warning=FALSE}
+chargeshist <- insurance %>%
   ggplot(aes(x = charges)) +
   geom_histogram() +
   theme_bw()
-```
 
-```{r responselog, echo=FALSE, fig.align='right', fig.height=5, fig.width=5, message=FALSE, warning=FALSE}
-insurance %>%
+chargesbox <- insurance %>%
   ggplot(aes(x = log(charges))) +
   geom_boxplot() +
   theme_bw()
+
+ggarrange(chargeshist, chargesbox,
+                    ncol = 1, nrow = 2)
 ```
 
 
 ---
 
-## BMI and Charges
+## EDA- BMI vs Charges
 
 ```{r graph1, warning = FALSE, message = FALSE, echo=FALSE}
 insurance %>%
@@ -101,7 +103,7 @@ insurance %>%
 
 
 ---
-## Age and Charges 
+## EDA- Age vs. Charges 
 
 ```{r graph2, warning = FALSE, message = FALSE, echo=FALSE}
 insurance %>%
@@ -112,18 +114,17 @@ insurance %>%
 
 
 ---
-## Children and Charges
+## EDA- Children vs. Charges
 
 ```{r graph3, warning = FALSE, message = FALSE, echo=FALSE}
-#Children vs Charges
 insurance %>%
   ggplot(aes(x = children, y = charges)) +
-  geom_boxplot() +
+  geom_point() +
   theme_bw()
 ```
 
 ---
-## Sex and Charges 
+## EDA- Sex vs. Charges 
 ```{r graph4, warning = FALSE, message = FALSE, echo=FALSE}
 insurance %>%
   ggplot(aes(x = sex, y = charges)) +
@@ -131,7 +132,7 @@ insurance %>%
   theme_bw()
 ```
 ---
-## Region and Charges
+## EDA- Region vs. Charges
 ```{r graph5, warning = FALSE, message = FALSE, echo=FALSE}
 insurance %>%
   ggplot(aes(x = region, y = charges)) +
@@ -140,7 +141,7 @@ insurance %>%
 ```
 
 ---
-## Smoker and Charges
+## EDA- Smoker vs. Charges
 
 ```{r graph6, warning = FALSE, message = FALSE, echo=FALSE}
 insurance %>%
@@ -162,9 +163,7 @@ Below 18.5	Underweight
 
 30.0 and Above	Obesity
 
----
-
-```{r bmicat, warning=TRUE, message=FALSE, echo=FALSE, fig.align='top'}
+```{r bmicat, warning=TRUE, message=FALSE, echo=FALSE, fig.align='top', fig.height=4, fig.width=6}
 insurance <- insurance %>%
   mutate(bmi_categories = case_when(
     bmi >= 30 ~ "Obesity",
@@ -208,11 +207,19 @@ charges ~ smoker + age + bmi_categories + children
 --
 
 P-Value: < 2.2e-16;; Adjusted R-Squared: 0.7528 
+
+---
+## Quadratic Term for Age
+
+```{r}
+model_4 <- lm(charges ~ smoker + age + bmi_categories + children+region + I(age^2), insurance)
+```
+
+
 ---
 ## Incorporating Interaction Terms
 
-```{r}
-library(ggpubr)
+```{r interaction, warning=FALSE, message=FALSE, echo=FALSE}
 bmi_graph <- insurance %>%
   ggplot(aes(x = age, y = charges, col = bmi_categories)) +
   geom_point(alpha = 0.6, size = 2.5)
@@ -222,27 +229,38 @@ smoker_graph <- insurance %>%
   geom_point(alpha = 0.8,size = 2.5)
 
 ggarrange(bmi_graph, smoker_graph,
-                    labels = c("A", "B"),
                     ncol = 1, nrow = 2)
 ```
 
+---
+## Incorporating Interaction Terms
+
+```{r}
+model_5 <-lm(charges~smoker+ age+ bmi_categories+ children+region+ I(age^2) + bmi_categories:smoker, insurance)
+```
 
 ---
 ## Checking AOV
 
----
-## Final Model
+```{r}
+anova(model_5, model_4)
+```
 
 ---
 
 ## Residual Analysis
 
 ```{r residuals, warning = FALSE, message=FALSE, echo= TRUE, results= FALSE}
-#library(ggfortify)
-#autoplot()
+plot(model_5)
 ```
+
+---
+## Final Model
+
 
 
 ---
 ## Conclusion
+
+
 
