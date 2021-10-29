@@ -159,7 +159,7 @@ model_7 <- lm(charges ~ smoker + age + bmi_categories + children + bmi_categorie
 ```
 
 ```{r}
-anova(model_5, model_7)
+anova(model_7, model_5)
 ```
 
 
@@ -185,6 +185,20 @@ insurance %>%
   ggplot(aes(x = age, y = charges, color = region)) +
   geom_point()
 ```
+
+
+```{r}
+model_8<- lm(charges ~ smoker + age + bmi_categories + children+region +sex + bmi_categories:smoker + I(age^2), insurance)
+summary(model_8)
+```
+
+
+
+```{r}
+anova(model_5, model_8)
+```
+
+
 
 ```{r}
 #Single variable models
