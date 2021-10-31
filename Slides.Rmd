@@ -281,3 +281,8 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
 
 - Other related factors not included in the data set are needed.
 
+```{r out.width='35%', echo=FALSE}
+knitr::include_graphics("IMG_1185 2.JPG")
+```
+
+
