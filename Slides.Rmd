@@ -262,5 +262,7 @@ plot(model_5)
 ---
 ## Conclusion
 
+Relevant variables When it comes to predicting
 
+Could be affected by variables not included in our data set
 
