@@ -4,19 +4,21 @@ author: "Sean Froidcoeur, Nicole Tucker, and Sarah Vreeland"
 date: "November 1st, 2021"
 output:
   xaringan::moon_reader:
-    lib_dir: libs
+    css: xaringan-themer.css
     nature:
+      slideNumberFormat: "%current%"
+      highlightStyle: github
       highlightLines: true
-      countIncrementalSlides: false
+      ratio: 16:9
+      countIncrementalSlides: true
 ---
-
 ```{r setup, echo = FALSE}
 knitr::opts_chunk$set(fig.retina = 3, warning = FALSE, message = FALSE)
 ```
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
 library(xaringanthemer)
-style_mono_accent(base_color = "#cc002b")
+style_mono_accent(base_color = "#2d8dd6")
 ```
 
 ## Introduction
@@ -208,11 +210,23 @@ charges ~ smoker + age + bmi_categories + children
 
 P-Value: < 2.2e-16;; Adjusted R-Squared: 0.7528 
 
+
 ---
 ## Quadratic Term for Age
 
-```{r}
-model_4 <- lm(charges ~ smoker + age + bmi_categories + children+region + I(age^2), insurance)
+```{r model4, warning=FALSE, message=FALSE, echo=FALSE}
+model_4 <- lm(charges ~ smoker + age + bmi_categories + children + I(age^2), insurance)
+```
+
+charges ~ smoker + age + bmi_categories + children + I(age^2), data = insurance)
+
+- F-Test p-value:
+- Adjusted R-Squared:
+
+```{r anova2, warning = FALSE, message=FALSE, echo= FALSE, results= FALSE}
+anova1 <- anova(both, model_4) %>%
+  tidy()
+gt(anova1)
 ```
 
 
@@ -233,34 +247,42 @@ ggarrange(bmi_graph, smoker_graph,
 ```
 
 ---
-## Incorporating Interaction Terms
+## Incorporating Interaction Terms & Checking ANOVA
 
-```{r}
-model_5 <-lm(charges~smoker+ age+ bmi_categories+ children+region+ I(age^2) + bmi_categories:smoker, insurance)
+```{r model5, warning=FALSE, message=FALSE, echo=FALSE}
+model_5 <-lm(charges~smoker+ age+ bmi_categories+ children + I(age^2) + bmi_categories:smoker, insurance)
 ```
+charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:smoker
 
----
-## Checking AOV
+- F-Test p-value:
+- Adjusted R-Squared:
 
-```{r}
-anova(model_5, model_4)
+```{r anova, warning=FALSE, message=FALSE}
+anova <- anova(model_5, model_4) %>%
+  tidy()
+gt(anova)
 ```
 
 ---
 
 ## Residual Analysis
 
-```{r residuals, warning = FALSE, message=FALSE, echo= TRUE, results= FALSE}
-plot(model_5)
+```{r residuals, warning = FALSE, message=FALSE, echo= FALSE, results= FALSE}
+plot(model_5, which = 1)
 ```
 
 ---
 ## Final Model
 
+charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:smoker
+
+- F-Test p-value:
+- Adjusted R-Squared:
 
 
 ---
 ## Conclusion
 
+- limitations of model
 
 
