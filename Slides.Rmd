@@ -68,12 +68,6 @@ Response: Charges
 
 
 ---
-#Important Summary Statistics 
-
-
-
-
----
 ## The Response Variable
 
 ```{r response, echo=FALSE, message=FALSE, warning=FALSE}
@@ -220,8 +214,8 @@ model_4 <- lm(charges ~ smoker + age + bmi_categories + children + I(age^2), ins
 
 charges ~ smoker + age + bmi_categories + children + I(age^2), data = insurance)
 
-- F-Test p-value:
-- Adjusted R-Squared:
+- F-Test p-value: < 2.2e-16
+- Adjusted R-Squared: 0.755
 
 ```{r anova2, warning = FALSE, message=FALSE, echo= FALSE, results= FALSE}
 anova1 <- anova(both, model_4) %>%
@@ -254,10 +248,10 @@ model_5 <-lm(charges~smoker+ age+ bmi_categories+ children + I(age^2) + bmi_cate
 ```
 charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:smoker
 
-- F-Test p-value:
-- Adjusted R-Squared:
+- F-Test p-value: < 2.2e-16
+- Adjusted R-Squared: 0.8636
 
-```{r anova, warning=FALSE, message=FALSE}
+```{r anova, warning=FALSE, message=FALSE, echo=FALSE}
 anova <- anova(model_5, model_4) %>%
   tidy()
 gt(anova)
@@ -276,18 +270,14 @@ plot(model_5, which = 1)
 
 charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:smoker
 
-- F-Test p-value:
-- Adjusted R-Squared:
+- F-Test p-value: < 2.2e-16
+- Adjusted R-Squared: 0.8636
 
 
 ---
 ## Conclusion
 
-<<<<<<< HEAD
-- limitations of model
-=======
-Relevant variables When it comes to predicting
->>>>>>> 3cdd03b805e99227056d32d9342f072cc5359d19
+- The selected variables do a good job of predicting charges.
 
-Could be affected by variables not included in our data set
+- Other related factors not included in the data set are needed.
 
