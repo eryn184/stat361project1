@@ -216,5 +216,48 @@ summary(model_6)
 cor(insurance$age, insurance$children)
 ```
 
+```{r}
+#Residual Analysis
+model_7_with_res <- augment(model_7)
+
+#Smoker
+model_7_with_res %>%
+  ggplot(aes(x = smoker, y = .resid)) +
+  geom_point(position = position_jitter(width = .1, height = 0)) +
+  geom_hline(yintercept=0)
+```
+
+```{r}
+#Age
+model_7_with_res %>%
+  ggplot(aes(x = age, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept=0)
+```
+
+```{r}
+#BMI Categories
+model_7_with_res %>%
+  ggplot(aes(x = bmi_categories, y = .resid)) +
+  geom_point(position = position_jitter(width = .1, height = 0)) +
+  geom_hline(yintercept=0)
+```
+
+```{r}
+#Children
+model_7_with_res %>%
+  ggplot(aes(x = children, y = .resid)) +
+  geom_point(position = position_jitter(width = .1, height = 0)) +
+  geom_hline(yintercept=0)
+```
+
+```{r}
+#Age^2 ***Are we supposed to include this? and does it need the I() or not??
+model_7_with_res %>%
+  ggplot(aes(x = age^2, y = .resid)) +
+  geom_point(position = position_jitter(width = .1, height = 0)) +
+  geom_hline(yintercept=0)
+```
+
 
 
