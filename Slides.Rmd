@@ -283,6 +283,11 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
 ---
 ## Conclusion
 
+<<<<<<< HEAD
 - limitations of model
+=======
+Relevant variables When it comes to predicting
+>>>>>>> 3cdd03b805e99227056d32d9342f072cc5359d19
 
+Could be affected by variables not included in our data set
 
