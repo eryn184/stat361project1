@@ -1,5 +1,5 @@
 ---
-title: "STAT361: "
+title: "Predicting Health Related Insurance Charges"
 author: "Sean Froidcoeur, Nicole Tucker, and Sarah Vreeland"
 date: "November 1st, 2021"
 output:
