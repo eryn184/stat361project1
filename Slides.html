@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>STAT361:</title>
+    <title>Predicting Health Related Insurance Charges</title>
     <meta charset="utf-8" />
     <meta name="author" content="Sean Froidcoeur, Nicole Tucker, and Sarah Vreeland" />
     <script src="Slides_files/header-attrs-2.8/header-attrs.js"></script>
@@ -11,7 +11,7 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# STAT361:
+# Predicting Health Related Insurance Charges
 ### Sean Froidcoeur, Nicole Tucker, and Sarah Vreeland
 ### November 1st, 2021
 
@@ -41,12 +41,12 @@ Insurance data from Kaggle containing 7 columns with 1338 observations.
 
 Each row/observation is one insured individual.
 
-<div id="fxbooynnxy" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="yxbkzzmhqv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#fxbooynnxy .gt_table {
+#yxbkzzmhqv .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -71,7 +71,7 @@ Each row/observation is one insured individual.
   border-left-color: #D3D3D3;
 }
 
-#fxbooynnxy .gt_heading {
+#yxbkzzmhqv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -83,7 +83,7 @@ Each row/observation is one insured individual.
   border-right-color: #D3D3D3;
 }
 
-#fxbooynnxy .gt_title {
+#yxbkzzmhqv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -93,7 +93,7 @@ Each row/observation is one insured individual.
   border-bottom-width: 0;
 }
 
-#fxbooynnxy .gt_subtitle {
+#yxbkzzmhqv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -103,13 +103,13 @@ Each row/observation is one insured individual.
   border-top-width: 0;
 }
 
-#fxbooynnxy .gt_bottom_border {
+#yxbkzzmhqv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fxbooynnxy .gt_col_headings {
+#yxbkzzmhqv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -124,7 +124,7 @@ Each row/observation is one insured individual.
   border-right-color: #D3D3D3;
 }
 
-#fxbooynnxy .gt_col_heading {
+#yxbkzzmhqv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -144,7 +144,7 @@ Each row/observation is one insured individual.
   overflow-x: hidden;
 }
 
-#fxbooynnxy .gt_column_spanner_outer {
+#yxbkzzmhqv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -156,15 +156,15 @@ Each row/observation is one insured individual.
   padding-right: 4px;
 }
 
-#fxbooynnxy .gt_column_spanner_outer:first-child {
+#yxbkzzmhqv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fxbooynnxy .gt_column_spanner_outer:last-child {
+#yxbkzzmhqv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fxbooynnxy .gt_column_spanner {
+#yxbkzzmhqv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -176,7 +176,7 @@ Each row/observation is one insured individual.
   width: 100%;
 }
 
-#fxbooynnxy .gt_group_heading {
+#yxbkzzmhqv .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -198,7 +198,7 @@ Each row/observation is one insured individual.
   vertical-align: middle;
 }
 
-#fxbooynnxy .gt_empty_group_heading {
+#yxbkzzmhqv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -213,15 +213,15 @@ Each row/observation is one insured individual.
   vertical-align: middle;
 }
 
-#fxbooynnxy .gt_from_md > :first-child {
+#yxbkzzmhqv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fxbooynnxy .gt_from_md > :last-child {
+#yxbkzzmhqv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fxbooynnxy .gt_row {
+#yxbkzzmhqv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -240,7 +240,7 @@ Each row/observation is one insured individual.
   overflow-x: hidden;
 }
 
-#fxbooynnxy .gt_stub {
+#yxbkzzmhqv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -252,7 +252,7 @@ Each row/observation is one insured individual.
   padding-left: 12px;
 }
 
-#fxbooynnxy .gt_summary_row {
+#yxbkzzmhqv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -262,7 +262,7 @@ Each row/observation is one insured individual.
   padding-right: 5px;
 }
 
-#fxbooynnxy .gt_first_summary_row {
+#yxbkzzmhqv .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -272,7 +272,7 @@ Each row/observation is one insured individual.
   border-top-color: #D3D3D3;
 }
 
-#fxbooynnxy .gt_grand_summary_row {
+#yxbkzzmhqv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -282,7 +282,7 @@ Each row/observation is one insured individual.
   padding-right: 5px;
 }
 
-#fxbooynnxy .gt_first_grand_summary_row {
+#yxbkzzmhqv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -292,11 +292,11 @@ Each row/observation is one insured individual.
   border-top-color: #D3D3D3;
 }
 
-#fxbooynnxy .gt_striped {
+#yxbkzzmhqv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fxbooynnxy .gt_table_body {
+#yxbkzzmhqv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -305,7 +305,7 @@ Each row/observation is one insured individual.
   border-bottom-color: #D3D3D3;
 }
 
-#fxbooynnxy .gt_footnotes {
+#yxbkzzmhqv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -319,13 +319,13 @@ Each row/observation is one insured individual.
   border-right-color: #D3D3D3;
 }
 
-#fxbooynnxy .gt_footnote {
+#yxbkzzmhqv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#fxbooynnxy .gt_sourcenotes {
+#yxbkzzmhqv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -339,41 +339,41 @@ Each row/observation is one insured individual.
   border-right-color: #D3D3D3;
 }
 
-#fxbooynnxy .gt_sourcenote {
+#yxbkzzmhqv .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#fxbooynnxy .gt_left {
+#yxbkzzmhqv .gt_left {
   text-align: left;
 }
 
-#fxbooynnxy .gt_center {
+#yxbkzzmhqv .gt_center {
   text-align: center;
 }
 
-#fxbooynnxy .gt_right {
+#yxbkzzmhqv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fxbooynnxy .gt_font_normal {
+#yxbkzzmhqv .gt_font_normal {
   font-weight: normal;
 }
 
-#fxbooynnxy .gt_font_bold {
+#yxbkzzmhqv .gt_font_bold {
   font-weight: bold;
 }
 
-#fxbooynnxy .gt_font_italic {
+#yxbkzzmhqv .gt_font_italic {
   font-style: italic;
 }
 
-#fxbooynnxy .gt_super {
+#yxbkzzmhqv .gt_super {
   font-size: 65%;
 }
 
-#fxbooynnxy .gt_footnote_marks {
+#yxbkzzmhqv .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -542,12 +542,12 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
 - F-Test p-value: &lt; 2.2e-16
 - Adjusted R-Squared: 0.8636
 
-<div id="hxyfpkxzxa" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="hkifytrkcc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#hxyfpkxzxa .gt_table {
+#hkifytrkcc .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -572,7 +572,7 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   border-left-color: #D3D3D3;
 }
 
-#hxyfpkxzxa .gt_heading {
+#hkifytrkcc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -584,7 +584,7 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   border-right-color: #D3D3D3;
 }
 
-#hxyfpkxzxa .gt_title {
+#hkifytrkcc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -594,7 +594,7 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   border-bottom-width: 0;
 }
 
-#hxyfpkxzxa .gt_subtitle {
+#hkifytrkcc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -604,13 +604,13 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   border-top-width: 0;
 }
 
-#hxyfpkxzxa .gt_bottom_border {
+#hkifytrkcc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hxyfpkxzxa .gt_col_headings {
+#hkifytrkcc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -625,7 +625,7 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   border-right-color: #D3D3D3;
 }
 
-#hxyfpkxzxa .gt_col_heading {
+#hkifytrkcc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -645,7 +645,7 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   overflow-x: hidden;
 }
 
-#hxyfpkxzxa .gt_column_spanner_outer {
+#hkifytrkcc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -657,15 +657,15 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   padding-right: 4px;
 }
 
-#hxyfpkxzxa .gt_column_spanner_outer:first-child {
+#hkifytrkcc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hxyfpkxzxa .gt_column_spanner_outer:last-child {
+#hkifytrkcc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hxyfpkxzxa .gt_column_spanner {
+#hkifytrkcc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -677,7 +677,7 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   width: 100%;
 }
 
-#hxyfpkxzxa .gt_group_heading {
+#hkifytrkcc .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -699,7 +699,7 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   vertical-align: middle;
 }
 
-#hxyfpkxzxa .gt_empty_group_heading {
+#hkifytrkcc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -714,15 +714,15 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   vertical-align: middle;
 }
 
-#hxyfpkxzxa .gt_from_md > :first-child {
+#hkifytrkcc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hxyfpkxzxa .gt_from_md > :last-child {
+#hkifytrkcc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hxyfpkxzxa .gt_row {
+#hkifytrkcc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -741,7 +741,7 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   overflow-x: hidden;
 }
 
-#hxyfpkxzxa .gt_stub {
+#hkifytrkcc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -753,7 +753,7 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   padding-left: 12px;
 }
 
-#hxyfpkxzxa .gt_summary_row {
+#hkifytrkcc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -763,7 +763,7 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   padding-right: 5px;
 }
 
-#hxyfpkxzxa .gt_first_summary_row {
+#hkifytrkcc .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -773,7 +773,7 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   border-top-color: #D3D3D3;
 }
 
-#hxyfpkxzxa .gt_grand_summary_row {
+#hkifytrkcc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -783,7 +783,7 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   padding-right: 5px;
 }
 
-#hxyfpkxzxa .gt_first_grand_summary_row {
+#hkifytrkcc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -793,11 +793,11 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   border-top-color: #D3D3D3;
 }
 
-#hxyfpkxzxa .gt_striped {
+#hkifytrkcc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hxyfpkxzxa .gt_table_body {
+#hkifytrkcc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -806,7 +806,7 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   border-bottom-color: #D3D3D3;
 }
 
-#hxyfpkxzxa .gt_footnotes {
+#hkifytrkcc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -820,13 +820,13 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   border-right-color: #D3D3D3;
 }
 
-#hxyfpkxzxa .gt_footnote {
+#hkifytrkcc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#hxyfpkxzxa .gt_sourcenotes {
+#hkifytrkcc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -840,41 +840,41 @@ charges ~ smoker + age + bmi_categories + children + I(age^2) + bmi_categories:s
   border-right-color: #D3D3D3;
 }
 
-#hxyfpkxzxa .gt_sourcenote {
+#hkifytrkcc .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#hxyfpkxzxa .gt_left {
+#hkifytrkcc .gt_left {
   text-align: left;
 }
 
-#hxyfpkxzxa .gt_center {
+#hkifytrkcc .gt_center {
   text-align: center;
 }
 
-#hxyfpkxzxa .gt_right {
+#hkifytrkcc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hxyfpkxzxa .gt_font_normal {
+#hkifytrkcc .gt_font_normal {
   font-weight: normal;
 }
 
-#hxyfpkxzxa .gt_font_bold {
+#hkifytrkcc .gt_font_bold {
   font-weight: bold;
 }
 
-#hxyfpkxzxa .gt_font_italic {
+#hkifytrkcc .gt_font_italic {
   font-style: italic;
 }
 
-#hxyfpkxzxa .gt_super {
+#hkifytrkcc .gt_super {
   font-size: 65%;
 }
 
-#hxyfpkxzxa .gt_footnote_marks {
+#hkifytrkcc .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
